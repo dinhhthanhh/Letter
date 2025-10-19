@@ -206,16 +206,18 @@ document.addEventListener("mousemove", (e) => {
     }));
     
     function checkPassword() {
-        let entered = Array.from(inputs).map(i => i.value).join('');
-        if(entered === correctPassword) {
-            audio.play();
-            overlay.style.display = "none";
-        } else {
-            errorMsg.textContent = "Mật khẩu không đúng, thử lại!";
-            inputs.forEach(i => i.value = "");
-            inputs[0].focus();
-        }
-    }
-    
+      let entered = Array.from(inputs)
+          .map(i => i.value.trim())
+          .join('');
+  
+      if(entered === correctPassword) {
+          audio.play();
+          overlay.style.display = "none";
+      } else {
+          errorMsg.textContent = "Mật khẩu không đúng, thử lại!";
+          inputs.forEach(i => i.value = "");
+          inputs[0].focus();
+      }
+  }  
   });
   
