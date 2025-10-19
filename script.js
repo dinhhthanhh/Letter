@@ -176,7 +176,7 @@ document.addEventListener("mousemove", (e) => {
         setTimeout(() => gift.remove(), 1000);
       }
     });
-    const correctPassword = "281206"; // mật khẩu ddmmyy
+    const correctPassword = "281204"; // mật khẩu ddmmyy
 
     const overlay = document.getElementById("passwordOverlay");
     const btn = document.getElementById("passwordBtn");
