@@ -1,7 +1,8 @@
-// Create stars
+document.addEventListener('DOMContentLoaded', () => {
+
 function createStars() {
     const container = document.getElementById('starsContainer');
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 50; i++) {
         const star = document.createElement('div');
         star.className = 'star';
         star.style.left = Math.random() * 100 + '%';
@@ -17,6 +18,7 @@ createStars();
 let clickCount = 0;
 let currentState = 0; // 0: heart, 1: envelope, 2: short letter, 3: full letter
 let letterState = 0; // 0: envelope, 1: short, 2: full
+const maxClicks = 20;
 const heartButton = document.getElementById('heartButton');
 const heartWrapper = document.getElementById('heartWrapper');
 const envelopeWrapper = document.getElementById('envelopeWrapper');
@@ -30,9 +32,23 @@ const envelope = document.getElementById('envelope');
 
 const gifts = ['💙', '🧸', '💝', '🌸', '🎀', '🍬', '💎', '🌷', '⭐', '✨'];
 let giftIndex = 0;
+let isAnimating = false;
+let canClick = true;
 
-// Heart button click handler
 heartButton.addEventListener('click', function() {
+    if (isAnimating || !canClick) return;
+    if (clickCount >= maxClicks) return; 
+    canClick = false; 
+    isAnimating = true;
+
+    // Hiệu ứng click (0.4s)
+    heartButton.classList.add('clicked');
+    setTimeout(() => {
+        heartButton.classList.remove('clicked');
+        isAnimating = false; // Cho phép click lại sau khi xong animation
+        canClick = true;
+    }, 400);
+
     clickCount++;
     const percentage = (clickCount / 20) * 100;
     fillProgress.style.width = Math.min(percentage, 100) + '%';
@@ -40,18 +56,30 @@ heartButton.addEventListener('click', function() {
 
     createConfetti();
 
-    if (clickCount >= 20 && !heartWrapper.classList.contains('hidden')) {
-        setTimeout(() => {
-            heartWrapper.classList.add('hidden');
-            envelopeWrapper.classList.add('show');
-            // Add appear animation to envelope
-            const envelope = document.getElementById('envelope');
-            envelope.classList.add('appear');
-            currentState = 1;
-            letterState = 0;
-        }, 300);
+    if (clickCount >= maxClicks && !heartWrapper.classList.contains('hidden')) {
+        triggerNextScene();
+      }
+    });
+  
+    function triggerNextScene() {
+      const curtain = document.getElementById('curtain');
+      curtain.classList.add('open');
+  
+      // Chặn mọi click khi đang mở curtain
+      isAnimating = true;
+  
+      // 🔹 Hiệu ứng fade nền hoặc chuyển sang animation khác
+      document.body.classList.add('fade-out');
+      setTimeout(() => {
+        heartWrapper.classList.add('hidden');
+        document.body.classList.remove('fade-out');
+        envelopeWrapper.classList.add('show');
+        envelope.classList.add('appear');
+        currentState = 1;
+        letterState = 0;
+        isAnimating = false;
+      }, 2000);
     }
-});
 
 // Envelope click handler
 envelope.addEventListener('click', function() {
@@ -84,43 +112,21 @@ letterFullWrapper.addEventListener('click', function(e) {
     if (e.target.closest('.click-hint')) return;
 
     if (letterState === 2) {
-        // Close letter and show envelope again
+        // Close letter and show envelope again with closing animation
         letterFullWrapper.classList.remove('show');
         envelopeWrapper.classList.add('show');
+        envelopeWrapper.classList.add('envelope-closing');
         letterState = 0;
+        // Add closing animation to envelope
+        envelope.classList.add('closing');
+        setTimeout(() => {
+            envelope.classList.remove('opened');
+            envelope.classList.remove('closing');
+            envelopeWrapper.classList.remove('envelope-closing');
+        }, 800);
     }
 });
 
-// Close letter function
-function closeLetter() {
-    if (letterState === 1) {
-        // Close short letter and show envelope
-        letterWrapper.classList.remove('show');
-        envelopeWrapper.classList.add('show');
-        envelopeWrapper.classList.add('envelope-closing');
-        letterState = 0;
-        // Add closing animation to envelope
-        envelope.classList.add('closing');
-        setTimeout(() => {
-            envelope.classList.remove('opened');
-            envelope.classList.remove('closing');
-            envelopeWrapper.classList.remove('envelope-closing');
-        }, 800);
-    } else if (letterState === 2) {
-        // Close full letter and show envelope
-        letterFullWrapper.classList.remove('show');
-        envelopeWrapper.classList.add('show');
-        envelopeWrapper.classList.add('envelope-closing');
-        letterState = 0;
-        // Add closing animation to envelope
-        envelope.classList.add('closing');
-        setTimeout(() => {
-            envelope.classList.remove('opened');
-            envelope.classList.remove('closing');
-            envelopeWrapper.classList.remove('envelope-closing');
-        }, 800);
-    }
-}
 
 // Confetti effect
 function createConfetti() {
@@ -137,16 +143,39 @@ function createConfetti() {
     }
 }
 
+heartButton.classList.add('clicked');
+setTimeout(() => heartButton.classList.remove('clicked'), 400);
+
 // Gift cursor effect
-document.addEventListener('mousemove', function(e) {
+document.addEventListener('pointermove', function(e) {
     if (Math.random() < 0.15) {
         const gift = document.createElement('div');
         gift.className = 'gift-cursor';
         gift.textContent = gifts[giftIndex % gifts.length];
         giftIndex++;
         gift.style.left = (e.clientX + (Math.random() - 0.5) * 40) + 'px';
-        gift.style.top = '-50px';
+        gift.style.top = (e.clientY - 20) + 'px';
         document.body.appendChild(gift);
         setTimeout(() => gift.remove(), 1000);
     }
+});
+// const heart = document.querySelector(".heart");
+// let canClick = true;
+
+// heart.addEventListener("click", () => {
+//   if (!canClick) return; // nếu đang cooldown thì bỏ qua
+//   canClick = false;
+
+//   heart.classList.add("active"); // thêm class hiệu ứng
+
+//   setTimeout(() => {
+//     heart.classList.remove("active"); // bỏ hiệu ứng sau 0.5s (tùy bạn)
+//   }, 500);
+
+//   // cooldown 1s để tránh spam
+//   setTimeout(() => {
+//     canClick = true;
+//   }, 1000);
+// });
+
 });
