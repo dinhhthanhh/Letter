@@ -30,10 +30,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const letterFull = document.getElementById('letterFull');
     const envelope = document.getElementById('envelope');
   
-    const gifts = ['💙', '🧸', '💝', '🌸', '🎀', '🍬', '💎', '🌷', '⭐', '✨'];
+    const gifts = ['💙','🎁', '🧸', '💝', '🌸', '🎀', '🍬', '🐻', '🌷', '⭐', '✨'];
     let giftIndex = 0;
     let isAnimating = false;
     let canClick = true; // 🔹 chặn click khi đang cooldown
+
+    let lastGiftTime = 0;
+
+document.addEventListener("mousemove", (e) => {
+  const now = Date.now();
+  if (now - lastGiftTime < 250) return; // 250ms = 0.25s, có thể chỉnh
+  lastGiftTime = now;
+
+  const icons = ['💙','🎁', '🧸', '💝', '🌸', '🎀', '🍬', '🐻', '🌷', '⭐', '✨'];
+  const gift = document.createElement("div");
+  gift.className = "gift-cursor";
+  gift.textContent = icons[Math.floor(Math.random() * icons.length)];
+  gift.style.left = e.pageX + "px";
+  gift.style.top = e.pageY + "px";
+  document.body.appendChild(gift);
+
+  setTimeout(() => gift.remove(), 1000);
+});
+
   
     heartButton.addEventListener('click', function() {
       if (isAnimating || !canClick) return; // Nếu đang chạy animation hoặc đang cooldown thì bỏ qua
@@ -54,8 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
       clickCount++;
       const percentage = (clickCount / maxClicks) * 100;
       fillProgress.style.width = Math.min(percentage, 100) + '%';
-      fillText.textContent = `${Math.round(percentage)}% 💕`;
-  
+      fillText.textContent = `Bấm Để Nạp: ${Math.round(percentage)}% 💕`;
+      if(clickCount >= maxClicks){
+        fillText.textContent = 'Đã Đầy! Mở Thư Tình 💌';
+      }
       createConfetti();
   
       // 🔹 Khi đủ 20 click thì chuyển sang animation tiếp theo
