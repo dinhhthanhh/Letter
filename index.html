@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Kalam:wght@300;400;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Thư gửi HTĐ</title>
+</head>
+<body>
+    <div class="stars" id="starsContainer"></div>
+
+    <div class="main-title">✨ HAPPY WOMEN'S DAY ✨</div>
+    <div class="subtitle">🌟 To the most wonderful woman 🌟</div>
+
+    <div class="container">
+        <!-- Decorations -->
+        <div class="decoration flower1">🌹</div>
+        <div class="decoration flower2">🌸</div>
+        <div class="decoration teddy1">🧸</div>
+        <div class="decoration candy1">🍬</div>
+        <div class="decoration rose1">🌷</div>
+        <div class="decoration heart1">💎</div>
+        <div class="decoration candy2">🎀</div>
+        <div class="decoration teddy2">🧸</div>
+        <div class="decoration flower3">🌺</div>
+        <div class="decoration rose2">🌹</div>
+        <div class="decoration star1">⭐</div>
+        <div class="decoration star2">✨</div>
+
+        <!-- Floating Images -->
+        <div class="floating-images">
+            <div class="floating-image img-far img1"></div>
+            <div class="floating-image img-far img2"></div>
+            <div class="floating-image img-near img3"></div>
+            <div class="floating-image img-near img4"></div>
+            <div class="floating-image img-near img5"></div>
+        </div>
+
+        <!-- Heart Button & Fill Bar -->
+        <div class="heart-button-wrapper" id="heartWrapper">
+            <div class="heart-button" id="heartButton">💓</div>
+            <div class="fill-bar">
+                <div class="fill-progress" id="fillProgress"></div>
+            </div>
+            <div class="fill-text" id="fillText">Bấm trái tim 💕</div>
+        </div>
+
+        <!-- Envelope -->
+        <div class="letter-wrapper" id="envelopeWrapper">
+            <div class="envelope" id="envelope">
+                <div class="envelope-body">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-content">
+                        ✨ Bấm vào đây ✨
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Letter Short -->
+        <div class="letter-wrapper" id="letterWrapper">
+            <div class="letter short-letter" id="letter">
+                <button class="close-btn" onclick="closeLetter()">×</button>
+                <div class="letter-content">
+                    <h2>💕 Happy Women's Day 💕</h2>
+                    <p>Yêu thương em,</p>
+                    <p>Hôm nay là một ngày đặc biệt để anh nói lên những điều anh cảm nhận về em.</p>
+                    <p>Em là ánh nắng, nụ cười, và yêu thương của anh. Cảm ơn vì những khoảnh khắc tuyệt vời bên em! ✨</p>
+                    <div class="letter-signature">
+                        Chúc em ngày phụ nữ hạnh phúc 🌸<br>
+                        Với tất cả tình yêu 💙<br>
+                        Của anh
+                    </div>
+                </div>
+                <div class="click-hint">👆 Bấm để đọc thư dài 💌</div>
+            </div>
+        </div>
+
+        <!-- Letter Full -->
+        <div class="letter-wrapper" id="letterFullWrapper">
+            <div class="letter full-letter" id="letterFull">
+                <button class="close-btn" onclick="closeLetter()">×</button>
+                <div class="letter-content">
+                    <h2>💎 Thư Yêu Thương 💎</h2>
+                    
+                    <p>Yêu thương em,</p>
+                    
+                    <p>Hôm nay là một ngày đặc biệt - ngày của những người phụ nữ tuyệt vời, và em là một trong những người quan trọng nhất trong cuộc đời anh. Anh viết thư này để nói lên những điều anh không thể nói hết chỉ bằng lời nói.</p>
+                    
+                    <p>Em là ánh nắng trong mỗi sáng thức dậy của anh. Nụ cười của em khiến những ngày khó khăn trở nên dễ dàng hơn, và sự có mặt của em khiến cuộc sống trở nên ý nghĩa hơn bao giờ hết. Anh rất biết ơn vì có được em bên cạnh.</p>
+                    
+                    <p>Những khoảnh khắc anh cùng em qua - từ những buổi cười vui, những lúc ôm nhau, đến những lần im lặng bên nhau - chúng đều là những khoảnh khắc quý giá nhất của anh. Em không chỉ là người yêu của anh, em còn là người anh tin tưởng, chia sẻ mọi thứ.</p>
+                    
+                    <p>Anh muốn nói với em rằng, em thực sự tuyệt vời. Không chỉ vì vẻ ngoài xinh đẹp, mà vì tâm hồn dịu dàng, lòng tốt bụng, và cách em yêu thương những người xung quanh. Em khiến anh trở thành một phiên bản tốt hơn của chính mình.</p>
+                    
+                    <p>Những nỗ lực của em, sự kiên nhẫn, và cách em chăm sóc những người xung quanh - tất cả đều khiến anh yêu em hơn mỗi ngày. Em không bao giờ tỏ ra yếu đuối, nhưng anh biết rằng đôi khi em cũng cần một vai để tựa. Anh ở đây cho em, bây giờ và mãi mãi.</p>
+                    
+                    <p>Mỗi ngày với em là một món quà quý giá. Anh hứa sẽ tiếp tục chăm sóc em, bảo vệ em, khiến em cảm thấy được yêu thương, và nỗ lực để em mỉm cười mỗi ngày. Những kỷ niệm đẹp chúng ta tạo ra sẽ luôn ở trong trái tim anh.</p>
+                    
+                    <p>Vào ngày 20/10 này, anh muốn nói rõ ràng: Em là tất cả những gì anh cần. Em là một phụ nữ tuyệt vời, xứng đáng nhận được tất cả những điều tốt đẹp nhất trong cuộc đời. Anh rất may mắn được yêu em, được sống bên em, và được là một phần trong câu chuyện của em.</p>
+                    
+                    <p>Chúc em một ngày 20/10 hạnh phúc, em yêu! Và hãy biết rằng, mỗi ngày với em đều là 20/10 trong trái tim anh. 💙</p>
+                    
+                    <div class="letter-signature">
+                        Với tất cả tình yêu 💙<br>
+                        Của anh 💕<br>
+                        Mãi mãi yêu em ✨
+                    </div>
+                </div>
+                <div class="click-hint">👆 Bấm để đóng thư 💌</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
