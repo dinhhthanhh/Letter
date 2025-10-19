@@ -176,6 +176,46 @@ document.addEventListener("mousemove", (e) => {
         setTimeout(() => gift.remove(), 1000);
       }
     });
-  
+    const correctPassword = "281206"; // mật khẩu ddmmyy
+
+    const overlay = document.getElementById("passwordOverlay");
+    const btn = document.getElementById("passwordBtn");
+    const errorMsg = document.getElementById("passwordError");
+    const audio = document.getElementById("successAudio");
+    const inputs = document.querySelectorAll(".otp-inputs .otp");
+    
+    // Tự động chuyển focus khi nhập
+    inputs.forEach((input, idx) => {
+        input.addEventListener("input", () => {
+            if(input.value.length === 1 && idx < inputs.length - 1) {
+                inputs[idx + 1].focus();
+            }
+        });
+    
+        input.addEventListener("keydown", (e) => {
+            if(e.key === "Backspace" && input.value === "" && idx > 0) {
+                inputs[idx - 1].focus();
+            }
+        });
+    });
+    
+    // Kiểm tra mật khẩu
+    btn.addEventListener("click", checkPassword);
+    inputs.forEach(i => i.addEventListener("keypress", (e) => {
+        if(e.key === "Enter") checkPassword();
+    }));
+    
+    function checkPassword() {
+        let entered = Array.from(inputs).map(i => i.value).join('');
+        if(entered === correctPassword) {
+            audio.play();
+            overlay.style.display = "none";
+        } else {
+            errorMsg.textContent = "Mật khẩu không đúng, thử lại!";
+            inputs.forEach(i => i.value = "");
+            inputs[0].focus();
+        }
+    }
+    
   });
   
